@@ -106,8 +106,22 @@ function generateTdEdit(fruit) {
     td.append(button);
     return td;
 }
+function createFruit(fruit) {
+    let endpoint = 'fruits';
+    let url = host + endpoint;
+    fetch(url, {
+        method: "post",
+        body: JSON.stringify(fruit),
+        headers:{
+           "Content-Type": "application/json" 
+        } 
+    })
+    .then(response => response.json())
+    .then(result => {
+        console.log(result)
+    });
 
-
+}
 
 saveButton.addEventListener('click', () => {
     
@@ -119,10 +133,9 @@ saveButton.addEventListener('click', () => {
         quantity: quantity, 
         price: price
     };
-    gyumolcsok.push(gyumolcs);
-    console.log(gyumolcsok);
+    createFruit(gyumolcs);
     tbody.textContent = '';
-    generateTbody();
+   getFruits();
     clearFieldOnAddModel();
 });
 
